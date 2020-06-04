@@ -21,7 +21,12 @@ export const readMail = (call: grpc.ServerUnaryCall<Id>, callback: grpc.sendUnar
 export const sendMail = (
 	call: grpc.ServerUnaryCall<SendMailReq>,
 	callback: grpc.sendUnaryData<DefaultResponse>
-): void => {}
+): void => {
+	console.log(call)
+	const defaultResponse = new DefaultResponse()
+
+	callback(null, defaultResponse)
+}
 
 export const sendMessage = (
 	call: grpc.ServerUnaryCall<SendMessageReq>,
