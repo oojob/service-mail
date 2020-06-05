@@ -1,4 +1,14 @@
-interface IMetadata {}
+interface ITimestamp {
+	seconds: string
+	nanos: string
+}
+interface IMetadata {
+	created_at: ITimestamp
+	updated_at: ITimestamp
+	published_date: ITimestamp
+	end_date: ITimestamp
+	last_active: ITimestamp
+}
 
 interface IMailTemplate {
 	id: string

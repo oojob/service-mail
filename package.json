@@ -13,8 +13,10 @@
   "license": "ISC",
   "dependencies": {
     "@oojob/protorepo-mail-node": "0.0.4",
+    "@sendgrid/mail": "^7.1.1",
     "dotenv": "^8.2.0",
     "grpc": "^1.24.2",
+    "grpc-errors": "^1.1.4",
     "nodemailer": "^6.4.8",
     "nodemailer-express-handlebars": "^4.0.0"
   },
