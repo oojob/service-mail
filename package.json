@@ -17,10 +17,12 @@
     "dotenv": "^8.2.0",
     "grpc": "^1.24.2",
     "grpc-errors": "^1.1.4",
+    "mongoose": "^5.9.18",
     "nodemailer": "^6.4.8",
     "nodemailer-express-handlebars": "^4.0.0"
   },
   "devDependencies": {
+    "@types/mongoose": "^5.7.22",
     "@types/node": "^14.0.5",
     "@types/nodemailer": "^6.4.0",
     "clean-webpack-plugin": "^3.0.0",
