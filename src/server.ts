@@ -15,9 +15,13 @@ import {
 } from './mail.service'
 
 import { MailServiceService } from '@oojob/protorepo-mail-node'
+import MongoConnection from 'dbs/mongo'
 
 class MailServer {
-	public start = (port: number) => {
+	public start = async (port: number) => {
+		const mongoConnection = new MongoConnection()
+		await mongoConnection.connectDatabase()
+
 		const server = new grpc.Server()
 
 		try {
@@ -32,7 +36,13 @@ class MailServer {
 				getMailNotification,
 				getMessageBox
 			})
-			server.bind(`0.0.0.0:${port}`, grpc.ServerCredentials.createInsecure())
+
+			server.bindAsync(`0.0.0.0:${port}`, grpc.ServerCredentials.createInsecure(), (err: Error, port: number) => {
+				if (err != null) {
+					return console.error(err)
+				}
+				console.log(`gRPC listening on ${port}`)
+			})
 			server.start()
 		} catch ({ message }) {
 			process.exit(1)

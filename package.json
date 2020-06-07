@@ -12,19 +12,22 @@
   "author": "nirajgeorgian <nirajgeorgian@gmail.com> (https://github.com/nirajgeorgian)",
   "license": "ISC",
   "dependencies": {
-    "@oojob/protorepo-mail-node": "0.0.4",
+    "@oojob/oojob-protobuf": "0.0.9",
+    "@oojob/protorepo-mail-node": "0.0.10",
     "@sendgrid/mail": "^7.1.1",
     "dotenv": "^8.2.0",
     "grpc": "^1.24.2",
     "grpc-errors": "^1.1.4",
     "mongoose": "^5.9.18",
     "nodemailer": "^6.4.8",
-    "nodemailer-express-handlebars": "^4.0.0"
+    "nodemailer-express-handlebars": "^4.0.0",
+    "uuid": "^8.1.0"
   },
   "devDependencies": {
     "@types/mongoose": "^5.7.22",
     "@types/node": "^14.0.5",
     "@types/nodemailer": "^6.4.0",
+    "@types/uuid": "^8.0.0",
     "clean-webpack-plugin": "^3.0.0",
     "start-server-webpack-plugin": "^2.2.5",
     "ts-loader": "^7.0.5",

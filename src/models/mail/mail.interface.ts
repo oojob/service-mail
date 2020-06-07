@@ -23,32 +23,15 @@ export interface IMailTemplateDocument extends IMailTemplate, Document {}
 export interface IMailTemplateModel extends Model<IMailTemplateDocument> {}
 
 interface IMessage {
-	id: string
 	message: string
-	attachments: string
+	attachments?: Array<string>
 	created_at: ITimestamp
-	read_at: ITimestamp
-}
-
-interface IMessageConversation {
-	id: string
-	to: string
-	messages: Array<IMessage>
-	metadata: IMetadata
-}
-
-interface IMailConversation {
-	id: string
-	from: string
-	to: string
-	subject: string
-	messages: Array<IMessage>
-	template: { type: Types.ObjectId | IMailTemplateDocument }
-	metadata: IMetadata
+	read_at?: ITimestamp
 }
 
 export interface IUserMessageBox {
-	conversations: Array<Map<string, IMessageConversation>>
+	to: string
+	messages: Array<IMessage>
 	metadata: IMetadata
 }
 
@@ -56,7 +39,11 @@ export interface IUserMessageBoxDocument extends IUserMessageBox, Document {}
 export interface IUserMessageBoxModel extends Model<IUserMessageBoxDocument> {}
 
 export interface IUserMailBox {
-	conversations: Array<Map<string, IMailConversation>>
+	from: string
+	to: string
+	subject: string
+	messages: Array<IMessage>
+	template: { type: Types.ObjectId | IMailTemplateDocument }
 	metadata: IMetadata
 }
 

@@ -26,46 +26,35 @@ export const MailTemplateSchema: Schema = new Schema({
 	logo: { type: String },
 	metadata: Metadata
 })
-export const MailTemplateModel = model<IMailTemplateDocument, IMailTemplateModel>('Mailtemplate', MailTemplateSchema)
+export const MailTemplateModel = model<IMailTemplateDocument, IMailTemplateModel>('mailtemplate', MailTemplateSchema)
 
 const Message = {
 	id: { type: String },
 	message: { type: String },
+	attachments: [{ type: String }],
 	created_at: { seconds: Number, nanos: Number },
 	read_at: { seconds: Number, nanos: Number }
 }
 
-const MessageConversation = {
-	id: { type: String },
-	to: { type: String },
-	messages: [Message],
-	metadata: Metadata
-}
-
-const MailConversation = {
-	id: { type: String },
-	from: { type: String },
-	to: { type: String },
-	subject: { type: String },
-	messages: [Message],
-	template: { type: Schema.Types.ObjectId, ref: 'MailTemplate' },
-	metadata: Metadata
-}
-
 export const UserMessageBoxSchema: Schema = new Schema({
-	conversations: [{ type: Map, of: MessageConversation }],
+	to: { type: String },
+	messages: [Message],
 	metadata: Metadata
 })
 export const UserMessageBoxModel = model<IUserMessageBoxDocument, IUserMessageBoxModel>(
-	'UserMessage',
+	'usermessage',
 	UserMessageBoxSchema
 )
 
 export const UserMailBoxSchema: Schema = new Schema({
-	conversations: [{ type: Map, of: MailConversation }],
+	from: { type: String },
+	to: { type: String },
+	subject: { type: String },
+	messages: [Message],
+	template: { type: Schema.Types.ObjectId, ref: 'mailTemplate' },
 	metadata: Metadata
 })
-export const UserMailBoxModel = model<IUserMailBoxDocument, IUserMailBoxModel>('UserMail', UserMailBoxSchema)
+export const UserMailBoxModel = model<IUserMailBoxDocument, IUserMailBoxModel>('usermail', UserMailBoxSchema)
 
 const MailNotifications = {
 	daily_digest: { type: Boolean, default: true },
@@ -81,11 +70,11 @@ const MailNotifications = {
 export const MailSchema: Schema = new Schema({
 	user_id: { type: String },
 	notifications: MailNotifications,
-	mail_templates: [{ type: Schema.Types.ObjectId, ref: 'MailTemplate' }],
-	messages: [{ type: Schema.Types.ObjectId, ref: 'UserMessage' }],
-	mails: [{ type: Schema.Types.ObjectId, ref: 'UserMail' }],
+	mail_templates: [{ type: Schema.Types.ObjectId, ref: 'mailtemplate' }],
+	messages: [{ type: Schema.Types.ObjectId, ref: 'usermessage' }],
+	mails: [{ type: Schema.Types.ObjectId, ref: 'usermail' }],
 	metadata: Metadata
 })
-export const MailModel = model<IMailDocument, IMailModel>('Mail', MailSchema)
+export const MailModel = model<IMailDocument, IMailModel>('mail', MailSchema)
 
 export default MailModel
