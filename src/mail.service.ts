@@ -72,6 +72,19 @@ export const sendMail = async (
 
 				callback(null, defaultResponse)
 			} else {
+				const userMailBox = new UserMailBoxModel({
+					from,
+					to,
+					subject,
+					messages: [messageBody],
+					metadata
+				})
+				const userMailDoc = await userMailBox.save()
+				mailDoc.mails.push(userMailDoc.id)
+				await mailDoc.save()
+				await sgMail.send(mailRequest)
+
+				callback(null, defaultResponse)
 			}
 		} else {
 			const userMail = new MailModel({ user_id })
